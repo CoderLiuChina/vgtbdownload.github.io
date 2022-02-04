@@ -1,5 +1,5 @@
 # vgtbdownload.github.io
 
-Website to download VGTB
+下载VGTB唯一途径
 
-This will not be a public repo to protect data safety
+为保证数据安全，此处可能不会存放下载内容

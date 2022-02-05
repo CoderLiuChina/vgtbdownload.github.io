@@ -7,12 +7,70 @@
 </head>
 
 <body>
+    <h1>Please type your ID code</h1>
+    <input id="idcode" type="txt">
 
-    <h1>Download VGTB</h1>
-    <p>User Version</p>
-    <a href="user/userpack.zip">Download</a>
-    <p>Server pack</p>
-    <a href="Down2">Download</a>
+    <script>
+        function getNum(str) {
+            if (str == "a") return 10;
+            else if (str == "b") return 11;
+            else if (str == "c") return 12;
+            else if (str == "d") return 13;
+            else if (str == "e") return 14;
+            else if (str == 'f') return 15;
+            else return Number(str);
+
+        }
+
+        function check() {
+            var text = document.getElementById("idcode").value;
+            var iddata = ["a"];
+            var id = new String();
+            //规定身份码构成：2位key+主内容
+            var key = Number(text[0]) * 10 + Number(text[1]);
+            for (var i = 2; i < text.length; i += 4) {
+                var x = getNum(text[i]) * 16 + getNum(text[i + 1]);
+                var y = getNum(text[i + 2]) * 16 + getNum(text[i + 3]);
+                /*var x = Number(text[i]) * 16 + Number(text[i + 1]);
+                var y = Number(text[i + 2]) * 16 + Number(text[i + 3]);*/
+                var chNum = x * key + y;
+                var ch = String.fromCharCode(chNum);
+                id = id + ch;
+            }
+            for (var i = 0; i < iddata.length; i++) {
+                if (id == iddata[i]) {
+                    /* document.write("<p>Identity Confirmed</p>");
+                     document.write("<h1>Download VGTB</h1>");
+                     document.write("<p>User Version</p>");
+                     document.write("<a href=\"user\">Download</a>");
+                     document.write("<p>Server Pack</p>");
+                     document.write("<a href=\"server\">Download</a>");*/
+                    document.getElementById("main1").innerHTML = "ID confirmed";
+                    document.getElementById("main2").innerHTML = "Download VGTB";
+                    document.getElementById("main3").innerHTML = "User Version";
+                    document.getElementById("main4").innerHTML = "Download";
+                    document.getElementById("main5").innerHTML = "Server Pack";
+                    document.getElementById("main6").innerHTML = "Download";
+                    return;
+                } else continue;
+            }
+            //document.write("<p>Wrong!</p>");
+            document.getElementById("main1").innerHTML = "Wrong!";
+            document.getElementById("main2").innerHTML = "";
+            document.getElementById("main3").innerHTML = "";
+            document.getElementById("main4").innerHTML = "";
+            document.getElementById("main5").innerHTML = "";
+            document.getElementById("main6").innerHTML = "";
+            return;
+        }
+    </script>
+    <button type="button" onclick="check()">Confirm</button>
+    <p id="main1"></p>
+    <h1 id="main2"></h1>
+    <p id="main3"></p>
+    <a href="user" id="main4"></a>
+    <p id="main5"></p>
+    <a href="server" id="main6"></a>
 </body>
 
 </html>
